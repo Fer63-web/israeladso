@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Par o Impar?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>Verificador de Números Pares o Impares</h1>
+    <form method="POST">
+        <label for="numero">Introduce un número: </label>
+        <input type="number" id="numero" name="numero" minlength="1" maxlength="10" title="solo numero" step="1" required>
+        <button type="submit">Verificar</button>
+    </form>
+{% if resultado is not none %}
+    <h3>El número {{ numero }} es {{ resultado }}.</h3>
+    {% if error_bd %}
+    <h3>No se pudo guardar en la base de datos.</h3>
+    {% endif %}
+{% endif %}
+
+</body>
+</html>
+       
