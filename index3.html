@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Estudiante</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Estudiante</h1>
+
+        <form method="POST">
+
+            <label>Nombre</label>
+            <input type="text" name="nombre" required>
+
+            <label>Programa</label>
+            <input type="text" name="programa" required>
+
+            <label>Nota 1</label>
+            <input type="number" name="nota1" min="0" max="5" step="0.1" required>
+
+            <label>Nota 2</label>
+            <input type="number" name="nota2" min="0" max="5" step="0.1" required>
+
+            <label>Nota 3</label>
+            <input type="number" name="nota3" min="0" max="5" step="0.1" required>
+
+            <button type="submit">Calcular</button>
+
+        </form>
+
+        {% if estudiante %}
+
+        <div class="resultado">
+
+            <h2>{{ estudiante.nombre }}</h2>
+
+            <p>
+                <strong>Programa:</strong>
+                {{ estudiante.programa }}
+            </p>
+
+            <p>
+                <strong>Nota 1:</strong>
+                {{ estudiante.nota1 }}
+            </p>
+
+            <p>
+                <strong>Nota 2:</strong>
+                {{ estudiante.nota2 }}
+            </p>
+
+            <p>
+                <strong>Nota 3:</strong>
+                {{ estudiante.nota3 }}
+            </p>
+
+            <div class="promedio">
+                Promedio:
+                {{ "%.2f"|format(estudiante.calcular_promedio()) }}
+            </div>
+
+            <div class="estado">
+                Estado:
+                {{ estudiante.determinar_estado() }}
+            </div>
+
+            {% if error_bd %}
+            <p>No se pudo guardar en la base de datos.</p>
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
